@@ -1,0 +1,17 @@
+services:
+  dashboard:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      SWARMSYNC_HOST: 0.0.0.0
+      SWARMSYNC_PORT: 8000
+      MQTT_HOST: broker
+    depends_on:
+      - broker
+  broker:
+    image: eclipse-mosquitto:2
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro

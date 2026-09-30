@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f4">
+  <title>SwarmSync | Fleet operations</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="SwarmSync home"><span class="brand-mark">S</span><span>SwarmSync</span></a>
+    <div class="top-meta"><span class="live-dot"></span><span id="connection">Connecting</span><span class="divider"></span><span>WAREHOUSE SIMULATION</span></div>
+  </header>
+  <main>
+    <section class="title-row">
+      <div><p class="eyebrow">FLEET CONTROL / PROTOTYPE</p><h1>Warehouse overview</h1></div>
+      <div class="mode-select" role="group" aria-label="Coordination mode">
+        <button class="mode active" data-mode="swarm">SwarmSync</button><button class="mode" data-mode="baseline">Stop-and-wait</button>
+      </div>
+    </section>
+    <section class="metrics" aria-label="Run metrics">
+      <div class="metric"><span class="metric-label">COLLISIONS</span><strong id="collisions">0</strong><span class="metric-note">inter-robot</span></div>
+      <div class="metric"><span class="metric-label">DELIVERIES</span><strong><span id="completed">0</span><small id="task-total"> / 6</small></strong><span class="metric-note">completed tasks</span></div>
+      <div class="metric"><span class="metric-label">SIMULATION TICK</span><strong id="tick">0</strong><span class="metric-note">discrete time steps</span></div>
+      <div class="metric"><span class="metric-label">DEADLOCKS</span><strong id="deadlocks">0</strong><span class="metric-note">prolonged fleet stalls</span></div>
+    </section>
+    <section class="workspace">
+      <div class="map-panel">
+        <div class="panel-heading"><div><h2>Warehouse grid</h2><p>Live robot positions and route intent</p></div><div class="map-actions"><button id="clear-blockages" class="icon-button" title="Clear temporary blockages" aria-label="Clear temporary blockages">⌫</button><span class="tick-chip" id="run-state">PAUSED</span></div></div>
+        <div class="map-wrap"><div id="map" class="warehouse" role="img" aria-label="Interactive warehouse grid"></div></div>
+        <div class="legend"><span><i class="legend-robot r1"></i>R1</span><span><i class="legend-robot r2"></i>R2</span><span><i class="legend-robot r3"></i>R3</span><span><i class="legend-wall"></i>Racking</span><span><i class="legend-block"></i>Blocked aisle</span><span><i class="legend-stage"></i>Staging</span><span class="legend-help">Click an open tile to toggle an aisle blockage</span></div>
+        <div class="controls"><button id="run" class="primary"><span>▶</span> Run</button><button id="step" class="secondary" title="Advance one simulation tick">Step</button><button id="reset" class="secondary" title="Reset simulation">Reset</button><button id="compare" class="secondary compare"><span>↔</span> Compare runs</button><span class="control-hint">One tick = one movement decision</span></div>
+      </div>
+      <aside class="side-column">
+        <section class="side-panel"><div class="panel-heading compact"><div><h2>Fleet status</h2><p>Robot state and active assignment</p></div><span class="count-chip" id="robot-count">3 ACTIVE</span></div><div id="fleet" class="fleet-list"></div></section>
+        <section class="side-panel task-panel"><div class="panel-heading compact"><div><h2>Task queue</h2><p>Broadcast and nearest-robot claim</p></div><span class="count-chip" id="queue-count">0 QUEUED</span></div><div id="tasks" class="task-list"></div></section>
+      </aside>
+    </section>
+    <section class="lower-grid">
+      <section class="lower-panel"><div class="panel-heading compact"><div><h2>Coordination feed</h2><p>Claims, route changes and local reservations</p></div><span class="live-label"><i></i> LIVE</span></div><div id="events" class="event-list"></div></section>
+      <section class="lower-panel report-panel"><div class="panel-heading compact"><div><h2>Run comparison</h2><p>Same task set, measured simulation ticks</p></div><button id="run-compare" class="text-button">Run comparison <span>→</span></button></div><div id="report" class="report-empty">Run both modes to see the measured completion time and collision totals.</div><p class="scope-note">Simulation results describe this grid and workload only. No real robot hardware is modeled.</p></section>
+    </section>
+    <footer><span>SwarmSync prototype · PS 26123</span><span>Local simulation · decisions use shared map and deterministic robot rules</span></footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
