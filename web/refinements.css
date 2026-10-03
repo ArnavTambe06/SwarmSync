@@ -1,0 +1,152 @@
+:root {
+  --ink: #202a24;
+  --muted: #748078;
+  --line: #dfe6e0;
+  --panel: #ffffff;
+  --green: #287d58;
+  --green-deep: #1e6345;
+  --canvas: #f1f4f1;
+}
+
+* { letter-spacing: 0; }
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgb(255 255 255 / 96%);
+  box-shadow: 0 1px 0 rgb(31 48 36 / 3%);
+}
+
+.brand { gap: 9px; }
+.brand-mark { box-shadow: 0 2px 5px rgb(40 125 88 / 20%); }
+.top-meta { font-size: 9px; }
+
+main { padding-top: 32px; }
+.eyebrow { color: #5e7768; font-weight: 500; }
+h1 { font-size: 26px; font-weight: 650; }
+
+.metrics {
+  overflow: hidden;
+  box-shadow: 0 2px 7px rgb(30 50 37 / 3%);
+}
+
+.metric { min-height: 98px; position: relative; padding: 15px 18px; }
+.metric::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  content: "";
+  background: #91b7a0;
+}
+.metric:nth-child(2)::before { background: #d99b4c; }
+.metric:nth-child(3)::before { background: #749cba; }
+.metric:nth-child(4)::before { background: #9a83ba; }
+.metric-label { color: #758178; font-size: 9px; }
+.metric strong { font-size: 23px; }
+
+.workspace { gap: 16px; }
+.map-panel, .side-panel, .lower-panel {
+  border-color: #dce4dd;
+  box-shadow: 0 2px 8px rgb(30 50 37 / 3%);
+}
+.map-panel { padding: 17px 18px 14px; }
+.panel-heading h2 { letter-spacing: 0; }
+.panel-heading p { color: #818c84; }
+.tick-chip, .count-chip { border: 1px solid #e8ece8; }
+
+.warehouse {
+  background: #edf1ed;
+  border-color: #d6dfd7;
+  padding: 2px;
+  gap: 2px;
+}
+.cell {
+  background: #fbfcfb;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+.cell:not(.wall):hover {
+  background: #eff7f0;
+  box-shadow: inset 0 0 0 1px #5a9a74;
+}
+.cell.wall { background: #dce3dd; }
+.cell.blocked { background: #f2d2c9; }
+.cell.stage { background: #edf2d5; }
+.robot { font-weight: 600; box-shadow: 0 1px 3px rgb(25 35 28 / 26%); }
+
+.controls {
+  gap: 8px;
+  padding-top: 14px;
+}
+.controls button {
+  height: 34px;
+  border-radius: 5px;
+  transition: background-color 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+.controls button:hover { transform: translateY(-1px); }
+.primary { background: var(--green); border-color: var(--green); }
+.primary:hover { background: var(--green-deep); border-color: var(--green-deep); }
+.secondary:hover { background: #f5f8f5; border-color: #cbd7ce; }
+.compare { font-weight: 600 !important; }
+button:focus-visible, .cell:focus-visible {
+  outline: 2px solid #3e8a63;
+  outline-offset: 2px;
+}
+
+.side-panel { padding: 16px; }
+.fleet-row, .task-row { transition: background-color 120ms ease; }
+.fleet-row:hover, .task-row:hover { background: #fafcf9; }
+.fleet-badge { box-shadow: 0 1px 2px rgb(25 35 28 / 12%); }
+.battery-track { background: #e9eee9; }
+.battery-fill { border-radius: 5px; }
+.state-tag { border: 1px solid transparent; }
+.state-tag.moving, .state-tag.delivering { border-color: #d4ecdd; }
+.state-tag.yielding, .state-tag.blocked { border-color: #f1dfbd; }
+.task-status { padding: 4px 6px; border-radius: 4px; background: #f0f3f0; }
+.task-status.complete { background: #e5f3e9; }
+
+.lower-grid { gap: 16px; }
+.lower-panel { padding: 15px 16px; }
+.event-list { scrollbar-color: #cbd6cc transparent; scrollbar-width: thin; }
+.event-row { grid-template-columns: 48px minmax(0, 1fr); }
+.event-message { line-height: 1.45; }
+.event-message[data-kind="deadlock"] { color: #a94438; }
+.live-label { padding-top: 2px; }
+.live-label i, .live-dot { animation: pulse 1.8s ease-out infinite; }
+.report-result div { border: 1px solid #e9eee9; background: #f8faf8; }
+.report-result .winner { color: #287d58; }
+footer { color: #7f8a82; }
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgb(66 166 118 / 35%); }
+  70% { box-shadow: 0 0 0 5px rgb(66 166 118 / 0%); }
+  100% { box-shadow: 0 0 0 0 rgb(66 166 118 / 0%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 600px) {
+  main { padding-top: 22px; }
+  h1 { font-size: 23px; }
+  .metric { min-height: 88px; padding: 12px; }
+  .map-panel { padding: 13px 10px; }
+  .side-panel, .lower-panel { padding: 13px; }
+  .panel-heading p { max-width: 230px; line-height: 1.4; }
+  .legend-help { flex-basis: 100%; }
+  .controls button { padding: 0 10px; }
+}
