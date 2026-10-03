@@ -147,7 +147,7 @@ def main() -> None:
     start_mqtt()
     threading.Thread(target=simulation_loop, daemon=True).start()
     host = os.environ.get("SWARMSYNC_HOST", "127.0.0.1")
-    port = int(os.environ.get("SWARMSYNC_PORT", "8000"))
+    port = int(os.environ.get("PORT", os.environ.get("SWARMSYNC_PORT", "8000")))
     print(f"SwarmSync dashboard: http://{host}:{port}")
     ThreadingHTTPServer((host, port), Handler).serve_forever()
 

@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: swarmsync-prototype
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/state
